@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueOcean AG</title>
+
+    <!-- --------------------------- -->
+    <!-- Font -->
+    <!-- --------------------------- -->
+
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+
+    <!-- --------------------------- -->
+    <!-- CSS -->
+    <!-- --------------------------- -->
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body{
+            height: 100vh;
+            font-family: 'Open Sans', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .outer{
+            /* background: lightblue; */
+            height: 80%;
+            width: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            perspective: 1000px;
+        }
+
+        .inner{
+            transform-style: preserve-3d;
+            text-decoration: none;
+            width: 35rem;
+            height: 90%;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.603);
+            /* background: pink; */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-direction: column;
+            transition: all 0.75s ease-out;
+        }
+
+        .main-title{
+            width: 100%;
+            height: 10%;
+            color: rgb(17, 57, 110);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 500;
+            transition: all 0.75s ease-out;
+        }
+
+        .inner .pic{
+            height: 70%;
+            transition: all 0.75s ease-out;
+        }
+
+        .win{
+            width: 100%;
+            height: 8%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: orange;
+            color: white;
+}    </style>
+
+</head>
+<body>
+
+    <!-- --------------------------- -->
+    <!-- Äussere Kachel für den Mousenter -->
+    <!-- --------------------------- -->
+    <div class="outer">
+
+    <!-- --------------------------- -->
+    <!-- A-Tag als Kontainer für Text und Bild -->
+    <!-- --------------------------- -->
+        <a class="inner" href="https://www.tincandigital.ch/#1" target="_blank">
+            <h1 class="main-title">Surfboard BLU-RX4</h1>
+
+            <img class="pic" src="./surfboard.png" alt="Surfboard">
+
+            <h3 class="win">jetzt gewinnen!</h3>
+        </a>
+    </div>
+
+    <!-- --------------------------- -->
+    <!-- Code -->
+    <!-- --------------------------- -->
+    <script>
+
+        // Variablen werden deklariert 
+        const inner = document.querySelector('.inner');
+        const outer = document.querySelector('.outer');
+        const mainTitle = document.querySelector('.main-title');
+        const pic = document.querySelector('.pic');
+
+        // Event um die Kachel bei Mausbewegung zu animieren
+        outer.addEventListener('mousemove', (e) => {
+            let x = (window.innerWidth / 2 - e.pageX) / 25; 
+            let y = (window.innerHeight / 2 - e.pageY) / 25;
+            inner.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
+        });
+
+        // Event um die verschiedenen Elemente hervorzuheben
+        outer.addEventListener('mouseenter', (e) => {
+            // Hier wird zuerst die Transition entfernt um ungewünschte Effekte zu vermeiden
+            inner.style.transition = 'none';
+            // Hier werden die Elemente hervorgehoben und es werden Schatten produziert
+            mainTitle.style.transform = 'translateZ(150px)';
+            pic.style.transform = 'translateZ(250px)';
+        });
+
+        // Event um alle Elemente wieder zurück zu setzen
+        outer.addEventListener('mouseleave', (e) => {
+            inner.style.transition = 'all 0.5s ease';
+            inner.style.transform = `rotateY(0deg) rotateX(0deg)`;
+            mainTitle.style.transform = 'translateZ(0px)';
+            pic.style.transform = 'translateZ(0px)';
+        });
+    </script>
+    
+</body>
+</html>
